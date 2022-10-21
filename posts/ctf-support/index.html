@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        CTF Support ::
+        er072391 Blog
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="CTF Support Page # このページはCTFを行なう際、役にたつツールなどをまとめています。
+Pwn &amp;amp; Rev # GDB # GNUデバッガ(GDB)、GNUソフトウェア・システムで動く標準のデバッガ。
+多くのUnix系システムで動作可能な移植性の高いデバッガであり、Ada/C言語/C&#43;&#43;/Objective-C/Pascal/FORTRAN/FreeBASIC/Goといったプログラミング言語に対応している。
+Radare2 # バイナリをリバースエンジニアリングおよび分析するための完全なフレームワーク。
+コマンドラインから独立して使用できる以下の一連の小さなユーティリティで構成されている。
+[radiff2] バイナリ差分抽出ツール [rabin2] readelf-lineのバイナリ情報抽出ツール [rafind2] バイトパターン検索ツール [rahash2] ハッシュ計算ツール [rarun2] プログラムの実行環境を指定して実行できるツール [rasm2] アセンブラ/逆アセンブラ retdec # 逆コンパイラ。
+ELF/PE/Mach-O/COFF/AR(archive)/Intel HEX/生のマシンコードのファイル形式をサポートし、
+Intel x86/ARM/MIPS/PIC32/PowerPCの32 bitのアーキテクチャに対応している。
+C言語で記述されたファイルに出力が可能。
+Ghidra # 米国国家安全保障局によって開発されたオープンソースリバースエンジニアリングツール。
+GitHubで公開されている。Javaで記述されている。
+Pwntools # GallopsledというCTFチームがPwnableを解く際に使用している、Pythonで書かれたCTFフレームワーク。
+apktool # Androidアプリをリバースエンジニアリングするためのツール。
+dex2jar # Androidの.dexやJavaの.classファイル用の解析ツール。
+IDA Pro # 逆アセンブラ機能、デバッグ機能、デコンパイラ機能といった数多くの機能を完備したリバースエンジニアリングツール。
+逆アセンブラのデファクトスタンダードである。コード間の関連性チェックやAPIコール等を利用してプログラムの自動分析を行なう。
+Immunity Debugger # エクスプロイトの作成、マルウェアの解析、バイナリファイルのリバースエンジニアリングを行なうためのツール。関数のグラフ表示機能を備えたユーザーインターフェイス、ヒープ作成に特化して構築されたヒープ解析ツール。Python APIを基盤に、拡張が可能。
+checksec # 実行可能ファイルのPIE/RELRO/Canaries/ASLRなどのセキュリティ機構をチェックするためのbashスクリプト。
+rp(&#43;&#43;) # PE/ELF/Mach-Oの実行ファイルおよびx86/x64/ARM/ARM64のアーキテクチャ用のROPガジェットファインダー。
+Binary Exploitation Notes # バイナリエクスプロイトに関しての記述。"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://er072391.github.io/posts/ctf-support/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://er072391.github.io/assets/style.css" />
+
+<link rel="stylesheet" href="https://er072391.github.io/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://er072391.github.io/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://er072391.github.io/img/favicon.png" />
+
+
+<link href="https://er072391.github.io/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CTF Support"/>
+<meta name="twitter:description" content="CTF Support Page # このページはCTFを行なう際、役にたつツールなどをまとめています。
+Pwn &amp; Rev # GDB # GNUデバッガ(GDB)、GNUソフトウェア・システムで動く標準のデバッガ。
+多くのUnix系システムで動作可能な移植性の高いデバッガであり、Ada/C言語/C&#43;&#43;/Objective-C/Pascal/FORTRAN/FreeBASIC/Goといったプログラミング言語に対応している。
+Radare2 # バイナリをリバースエンジニアリングおよび分析するための完全なフレームワーク。
+コマンドラインから独立して使用できる以下の一連の小さなユーティリティで構成されている。
+[radiff2] バイナリ差分抽出ツール [rabin2] readelf-lineのバイナリ情報抽出ツール [rafind2] バイトパターン検索ツール [rahash2] ハッシュ計算ツール [rarun2] プログラムの実行環境を指定して実行できるツール [rasm2] アセンブラ/逆アセンブラ retdec # 逆コンパイラ。
+ELF/PE/Mach-O/COFF/AR(archive)/Intel HEX/生のマシンコードのファイル形式をサポートし、
+Intel x86/ARM/MIPS/PIC32/PowerPCの32 bitのアーキテクチャに対応している。
+C言語で記述されたファイルに出力が可能。
+Ghidra # 米国国家安全保障局によって開発されたオープンソースリバースエンジニアリングツール。
+GitHubで公開されている。Javaで記述されている。
+Pwntools # GallopsledというCTFチームがPwnableを解く際に使用している、Pythonで書かれたCTFフレームワーク。
+apktool # Androidアプリをリバースエンジニアリングするためのツール。
+dex2jar # Androidの.dexやJavaの.classファイル用の解析ツール。
+IDA Pro # 逆アセンブラ機能、デバッグ機能、デコンパイラ機能といった数多くの機能を完備したリバースエンジニアリングツール。
+逆アセンブラのデファクトスタンダードである。コード間の関連性チェックやAPIコール等を利用してプログラムの自動分析を行なう。
+Immunity Debugger # エクスプロイトの作成、マルウェアの解析、バイナリファイルのリバースエンジニアリングを行なうためのツール。関数のグラフ表示機能を備えたユーザーインターフェイス、ヒープ作成に特化して構築されたヒープ解析ツール。Python APIを基盤に、拡張が可能。
+checksec # 実行可能ファイルのPIE/RELRO/Canaries/ASLRなどのセキュリティ機構をチェックするためのbashスクリプト。
+rp(&#43;&#43;) # PE/ELF/Mach-Oの実行ファイルおよびx86/x64/ARM/ARM64のアーキテクチャ用のROPガジェットファインダー。
+Binary Exploitation Notes # バイナリエクスプロイトに関しての記述。"/>
+
+
+
+<meta property="og:title" content="CTF Support" />
+<meta property="og:description" content="CTF Support Page # このページはCTFを行なう際、役にたつツールなどをまとめています。
+Pwn &amp; Rev # GDB # GNUデバッガ(GDB)、GNUソフトウェア・システムで動く標準のデバッガ。
+多くのUnix系システムで動作可能な移植性の高いデバッガであり、Ada/C言語/C&#43;&#43;/Objective-C/Pascal/FORTRAN/FreeBASIC/Goといったプログラミング言語に対応している。
+Radare2 # バイナリをリバースエンジニアリングおよび分析するための完全なフレームワーク。
+コマンドラインから独立して使用できる以下の一連の小さなユーティリティで構成されている。
+[radiff2] バイナリ差分抽出ツール [rabin2] readelf-lineのバイナリ情報抽出ツール [rafind2] バイトパターン検索ツール [rahash2] ハッシュ計算ツール [rarun2] プログラムの実行環境を指定して実行できるツール [rasm2] アセンブラ/逆アセンブラ retdec # 逆コンパイラ。
+ELF/PE/Mach-O/COFF/AR(archive)/Intel HEX/生のマシンコードのファイル形式をサポートし、
+Intel x86/ARM/MIPS/PIC32/PowerPCの32 bitのアーキテクチャに対応している。
+C言語で記述されたファイルに出力が可能。
+Ghidra # 米国国家安全保障局によって開発されたオープンソースリバースエンジニアリングツール。
+GitHubで公開されている。Javaで記述されている。
+Pwntools # GallopsledというCTFチームがPwnableを解く際に使用している、Pythonで書かれたCTFフレームワーク。
+apktool # Androidアプリをリバースエンジニアリングするためのツール。
+dex2jar # Androidの.dexやJavaの.classファイル用の解析ツール。
+IDA Pro # 逆アセンブラ機能、デバッグ機能、デコンパイラ機能といった数多くの機能を完備したリバースエンジニアリングツール。
+逆アセンブラのデファクトスタンダードである。コード間の関連性チェックやAPIコール等を利用してプログラムの自動分析を行なう。
+Immunity Debugger # エクスプロイトの作成、マルウェアの解析、バイナリファイルのリバースエンジニアリングを行なうためのツール。関数のグラフ表示機能を備えたユーザーインターフェイス、ヒープ作成に特化して構築されたヒープ解析ツール。Python APIを基盤に、拡張が可能。
+checksec # 実行可能ファイルのPIE/RELRO/Canaries/ASLRなどのセキュリティ機構をチェックするためのbashスクリプト。
+rp(&#43;&#43;) # PE/ELF/Mach-Oの実行ファイルおよびx86/x64/ARM/ARM64のアーキテクチャ用のROPガジェットファインダー。
+Binary Exploitation Notes # バイナリエクスプロイトに関しての記述。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://er072391.github.io/posts/ctf-support/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-21T00:00:00+00:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >er072391 Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">CTF Support</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2022-10-21
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <h1 id="ctf-support-page">
+  <strong>CTF Support Page</strong>
+  <a href="#ctf-support-page" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<p>このページはCTFを行なう際、役にたつツールなどをまとめています。</p>
+<h1 id="pwn--rev">
+  Pwn &amp; Rev
+  <a href="#pwn--rev" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<h2 id="gdbhttpsman7orglinuxman-pagesman1gdb1html">
+  <a href="https://man7.org/linux/man-pages/man1/gdb.1.html">GDB</a>
+  <a href="#gdbhttpsman7orglinuxman-pagesman1gdb1html" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>GNUデバッガ(GDB)、GNUソフトウェア・システムで動く標準のデバッガ。<br>
+多くのUnix系システムで動作可能な移植性の高いデバッガであり、Ada/C言語/C++/Objective-C/Pascal/FORTRAN/FreeBASIC/Goといったプログラミング言語に対応している。</p>
+<h2 id="radare2httpsgithubcomradareorgradare2">
+  <a href="https://github.com/radareorg/radare2">Radare2</a>
+  <a href="#radare2httpsgithubcomradareorgradare2" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>バイナリをリバースエンジニアリングおよび分析するための完全なフレームワーク。<br>
+コマンドラインから独立して使用できる以下の一連の小さなユーティリティで構成されている。</p>
+<ul>
+<li>[radiff2] バイナリ差分抽出ツール</li>
+<li>[rabin2] readelf-lineのバイナリ情報抽出ツール</li>
+<li>[rafind2] バイトパターン検索ツール</li>
+<li>[rahash2] ハッシュ計算ツール</li>
+<li>[rarun2] プログラムの実行環境を指定して実行できるツール</li>
+<li>[rasm2] アセンブラ/逆アセンブラ</li>
+</ul>
+<h2 id="retdechttpsgithubcomavastretdec">
+  <a href="https://github.com/avast/retdec">retdec</a>
+  <a href="#retdechttpsgithubcomavastretdec" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>逆コンパイラ。<br>
+ELF/PE/Mach-O/COFF/AR(archive)/Intel HEX/生のマシンコードのファイル形式をサポートし、<br>
+Intel x86/ARM/MIPS/PIC32/PowerPCの32 bitのアーキテクチャに対応している。<br>
+C言語で記述されたファイルに出力が可能。</p>
+<h2 id="ghidrahttpsghidra-sreorg">
+  <a href="https://ghidra-sre.org/">Ghidra</a>
+  <a href="#ghidrahttpsghidra-sreorg" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>米国国家安全保障局によって開発されたオープンソースリバースエンジニアリングツール。<br>
+GitHubで公開されている。Javaで記述されている。</p>
+<h2 id="pwntoolshttpsgithubcomgallopsledpwntools">
+  <a href="https://github.com/Gallopsled/pwntools">Pwntools</a>
+  <a href="#pwntoolshttpsgithubcomgallopsledpwntools" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>GallopsledというCTFチームがPwnableを解く際に使用している、Pythonで書かれたCTFフレームワーク。</p>
+<h2 id="apktoolhttpsgithubcomibotpeachesapktool">
+  <a href="https://github.com/iBotPeaches/Apktool">apktool</a>
+  <a href="#apktoolhttpsgithubcomibotpeachesapktool" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Androidアプリをリバースエンジニアリングするためのツール。</p>
+<h2 id="dex2jarhttpsgithubcompxb1988dex2jar">
+  <a href="https://github.com/pxb1988/dex2jar">dex2jar</a>
+  <a href="#dex2jarhttpsgithubcompxb1988dex2jar" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Androidの.dexやJavaの.classファイル用の解析ツール。</p>
+<h2 id="ida-prohttpshex-rayscomida-pro">
+  <a href="https://hex-rays.com/ida-pro/">IDA Pro</a>
+  <a href="#ida-prohttpshex-rayscomida-pro" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>逆アセンブラ機能、デバッグ機能、デコンパイラ機能といった数多くの機能を完備したリバースエンジニアリングツール。<br>
+逆アセンブラのデファクトスタンダードである。コード間の関連性チェックやAPIコール等を利用してプログラムの自動分析を行なう。</p>
+<h2 id="immunity-debuggerhttpswwwimmunityinccomproductsdebugger">
+  <a href="https://www.immunityinc.com/products/debugger/">Immunity Debugger</a>
+  <a href="#immunity-debuggerhttpswwwimmunityinccomproductsdebugger" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>エクスプロイトの作成、マルウェアの解析、バイナリファイルのリバースエンジニアリングを行なうためのツール。関数のグラフ表示機能を備えたユーザーインターフェイス、ヒープ作成に特化して構築されたヒープ解析ツール。Python APIを基盤に、拡張が可能。</p>
+<h2 id="checksechttpsgithubcomslimm609checksecsh">
+  <a href="https://github.com/slimm609/checksec.sh">checksec</a>
+  <a href="#checksechttpsgithubcomslimm609checksecsh" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>実行可能ファイルのPIE/RELRO/Canaries/ASLRなどのセキュリティ機構をチェックするためのbashスクリプト。</p>
+<h2 id="rphttpsgithubcom0vercl0krp">
+  <a href="https://github.com/0vercl0k/rp">rp(++)</a>
+  <a href="#rphttpsgithubcom0vercl0krp" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>PE/ELF/Mach-Oの実行ファイルおよびx86/x64/ARM/ARM64のアーキテクチャ用のROPガジェットファインダー。</p>
+<h2 id="binary-exploitation-noteshttpsir0nstonegitbookionotes">
+  <a href="https://ir0nstone.gitbook.io/notes/">Binary Exploitation Notes</a>
+  <a href="#binary-exploitation-noteshttpsir0nstonegitbookionotes" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>バイナリエクスプロイトに関しての記述。</p>
+<h2 id="libc-database-searchhttpslibcblukatme">
+  <a href="https://libc.blukat.me/">libc database search</a>
+  <a href="#libc-database-searchhttpslibcblukatme" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>シンボルの位置(アドレス)からlibcを調べることができる。</p>
+<h2 id="socathttpskaworujpnorgsecuritysocat">
+  <a href="https://kaworu.jpn.org/security/socat">socat</a>
+  <a href="#socathttpskaworujpnorgsecuritysocat" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>2つの双方向バイトストリームを確立し、それらの間でデータを転送するコマンドラインベースのユーティリティ。</p>
+<h2 id="その他">
+  その他
+  <a href="#%e3%81%9d%e3%81%ae%e4%bb%96" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p><strong>strace</strong> Linux用のトレーサの一つ。プログラムが呼び出したシステムコールをトレースする。<br>
+<strong>ltrace</strong> Linux用のトレーサの一つ。プログラムが呼び出した共有ライブラリの関数をトレースする。<br>
+<strong>file</strong> ファイルの種類を調査するコマンド。<br>
+<strong>readelf</strong> LinuxやBSDなどのOSにおける実行ファイルの形式であるELFファイルの情報を表示するコマンド。<br>
+<strong>strings</strong> ファイル中に含まれる表示可能文字列を抽出して表示するコマンド。<br>
+<strong>grep</strong> マッチさせたいパターンとファイルを引数として取り、ファイル中からパターンマッチした行を抽出する。<br>
+<strong>objdump</strong> CUIベースの逆アセンブラ。<br>
+<strong>xxd</strong> ファイルや標準入力から受け取った内容を16進数、または２進数でダンプする。16進ダンプをバイナリに変換が可能。<br>
+<strong>od</strong> ファイルを８進数や１６進数などでダンプする。<br>
+<strong>hexdump</strong> ファイルや標準入力から受け取った内容を８進数や１６進数でダンプする。<br>
+<strong>printf</strong> フォーマット指定子を含むようなフォーマット文字列を利用して、文字列を表示する。<br>
+<strong>Vim + xxd</strong> Vimとxxdコマンドでバイナリファイルを編集する。</p>
+<!-- raw HTML omitted -->
+<h1 id="crypto">
+  Crypto
+  <a href="#crypto" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<h2 id="featherdusterhttpsgithubcomnccgroupfeatherduster">
+  <a href="https://github.com/nccgroup/featherduster">FeatherDuster</a>
+  <a href="#featherdusterhttpsgithubcomnccgroupfeatherduster" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>脆弱な暗号システムを特定して悪用するプロセスをできるだけ簡単にする暗号解読用のツール。</p>
+<h2 id="hash-extenderhttpsgithubcomiagox86hash_extender">
+  <a href="https://github.com/iagox86/hash_extender">Hash Extender</a>
+  <a href="#hash-extenderhttpsgithubcomiagox86hash_extender" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>MD4/MD5/RIPEND-160/SHA-0/SHA-1/SHA-256/SHA-512/WHIRLPOOLハッシュをサポートするハッシュ長拡張攻撃を実行するためのユーティリティ。</p>
+<h2 id="pkcrackhttpsgithubcomkeyunluopkcrack">
+  <a href="https://github.com/keyunluo/pkcrack">PkCrack</a>
+  <a href="#pkcrackhttpsgithubcomkeyunluopkcrack" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>既知平文攻撃を使用して、暗号化されているZIPファイルを復号するためのツール。</p>
+<h2 id="rsactftoolhttpsgithubcomrsactftoolrsactftool">
+  <a href="https://github.com/RsaCtfTool/RsaCtfTool">RsaCtfTool</a>
+  <a href="#rsactftoolhttpsgithubcomrsactftoolrsactftool" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>RSAマルチ攻撃ツール。脆弱な公開鍵からデータを解読し、秘密鍵の回復を試みる。<br>
+特定の公開鍵に対する最適な攻撃の自動選択を行なう。</p>
+<h2 id="xortoolhttpsgithubcomhellmanxortool">
+  <a href="https://github.com/hellman/xortool">xortool</a>
+  <a href="#xortoolhttpsgithubcomhellmanxortool" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>XOR分析を行なうためのツール。</p>
+<h2 id="padbusterhttpsgithubcomaoncyberlabspadbuster">
+  <a href="https://github.com/AonCyberLabs/PadBuster">PadBuster</a>
+  <a href="#padbusterhttpsgithubcomaoncyberlabspadbuster" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Padding Oracle攻撃を実行するための自動化するための Perlスクリプト。<br>
+任意の暗号文を解読し、任意の平文を暗号化し、自動応答分析を実行し、リクエストがオラクル攻撃のPaddingに対して脆弱かどうかを判断する機能を提供します。</p>
+<h2 id="hash-identifierhttpsgithubcomblackploithash-identifier">
+  <a href="https://github.com/blackploit/hash-identifier">hash-identifier</a>
+  <a href="#hash-identifierhttpsgithubcomblackploithash-identifier" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>ハッシュタイプを識別する。</p>
+<h2 id="factordbhttpfactordbcom">
+  <a href="http://factordb.com/">factordb</a>
+  <a href="#factordbhttpfactordbcom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>数値の素数DB。RSAを解読する際に活用できるオンラインツール。</p>
+<h2 id="hashcathttpsgithubcomhashcathashcat">
+  <a href="https://github.com/hashcat/hashcat">hashcat</a>
+  <a href="#hashcathttpsgithubcomhashcathashcat" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Windows/Linux/Macで利用可能なパスワードクラッカー。<br>
+総当り攻撃/辞書攻撃/マスク攻撃に対応している。</p>
+<h2 id="john-the-ripperhttpsgithubcomopenwalljohn">
+  <a href="https://github.com/openwall/john">John The Ripper</a>
+  <a href="#john-the-ripperhttpsgithubcomopenwalljohn" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>15の異なるプラットフォームで実行可能な、パスワードクラッカー。<br>
+パスワードハッシュの種類を自動的に検出することができ、カスタマイズ可能。</p>
+<h2 id="dcodehttpswwwdcodefr">
+  <a href="https://www.dcode.fr/">dCode</a>
+  <a href="#dcodehttpswwwdcodefr" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>ゲーム/パズル/コード化されたメッセージ/数字などを解読するのに役立つ800以上のツールセット。<br>
+様々な暗号を自動的にデコードが可能なオンラインツール。</p>
+<h2 id="substitution-solverhttpswwwguballadesubstitution-solver">
+  <a href="https://www.guballa.de/substitution-solver">Substitution Solver</a>
+  <a href="#substitution-solverhttpswwwguballadesubstitution-solver" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>単一アルファベット置換暗号の解読オンラインツール。</p>
+<h2 id="vigenere-solverhttpswwwguballadevigenere-solver">
+  <a href="https://www.guballa.de/vigenere-solver">Vigenere Solver</a>
+  <a href="#vigenere-solverhttpswwwguballadevigenere-solver" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Vigenere暗号/Beaufort暗号/Autokey暗号をサポートしている、オンライン解読ツール。</p>
+<h2 id="cyberchefhttpsgithubcomgchqcyberchef">
+  <a href="https://github.com/gchq/CyberChef">CyberChef</a>
+  <a href="#cyberchefhttpsgithubcomgchqcyberchef" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>ブラウザで動作するデータ加工ツール。<br>
+Base64やハッシュ値の計算、１６進数への変換と逆変換、QRコードの生成やグラフの描画などが可能。</p>
+<h2 id="primefachttpsgithubcomelliptic-shihoprimefac-fork">
+  <a href="https://github.com/elliptic-shiho/primefac-fork">primefac</a>
+  <a href="#primefachttpsgithubcomelliptic-shihoprimefac-fork" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>整数を因数分解するためのモジュールおよびコマンドラインユーティリティ。</p>
+<h2 id="crackstationhttpscrackstationnet">
+  <a href="https://crackstation.net/">CrackStation</a>
+  <a href="#crackstationhttpscrackstationnet" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>事前に計算された大規模なルックアップテーブルを使用して、パスワードハッシュをクラックします。</p>
+<!-- raw HTML omitted -->
+<h1 id="forensics">
+  Forensics
+  <a href="#forensics" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<h2 id="aperisolvehttpsaperisolvefr">
+  <a href="https://aperisolve.fr/">Aperi&rsquo;Solve</a>
+  <a href="#aperisolvehttpsaperisolvefr" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>画像のレイヤー解析を行なうオンラインプラットフォーム。<br>
+zsteg/steghide/outguess/exiftool/binwalk/foremost/stringを使用して、ステガノグラフィ解析を行うことができる。png/jpg/gif/bmp/jpeg/jfif/jpe/tiffをサポートしている。</p>
+<h2 id="exiftoolhttpsgithubcomexiftoolexiftool">
+  <a href="https://github.com/exiftool/exiftool">Exiftool</a>
+  <a href="#exiftoolhttpsgithubcomexiftoolexiftool" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>画像/音声/ビデオ/PDFメタデータの読み取り、書き込み、操作を行うためのツール。</p>
+<h2 id="binwalkhttpsgithubcomrefirmlabsbinwalk">
+  <a href="https://github.com/ReFirmLabs/binwalk">Binwalk</a>
+  <a href="#binwalkhttpsgithubcomrefirmlabsbinwalk" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>ファームウェアイメージの分析、リバースエンジニアリングおよび抽出するためのツール。</p>
+<h2 id="foremosthttpsgithubcomgerryamurphyforemost">
+  <a href="https://github.com/gerryamurphy/Foremost">Foremost</a>
+  <a href="#foremosthttpsgithubcomgerryamurphyforemost" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>ヘッダー/フッター/内部データ構造に基づいて失われたファイルを回復するためのフォレンジックツール。</p>
+<h2 id="steghidehttpsgithubcomstefanodevuonosteghide">
+  <a href="https://github.com/StefanoDeVuono/steghide">Steghide</a>
+  <a href="#steghidehttpsgithubcomstefanodevuonosteghide" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>さまざまな種類のデータを隠すことができるステガノグラフィツール。</p>
+<h2 id="stegoveritashttpsgithubcombannsecstegoveritas">
+  <a href="https://github.com/bannsec/stegoVeritas">StegoVeritas</a>
+  <a href="#stegoveritashttpsgithubcombannsecstegoveritas" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>自動画像ステガノグラフィ分析ツール。</p>
+<h2 id="strong-qr-decoderhttpsgithubcomwaidottostrong-qr-decoder">
+  <a href="https://github.com/waidotto/strong-qr-decoder">strong-qr-decoder</a>
+  <a href="#strong-qr-decoderhttpsgithubcomwaidottostrong-qr-decoder" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>強力なQRコードデコーダ。</p>
+<h2 id="qrazyboxhttpsgithubcommerricxqrazybox">
+  <a href="https://github.com/Merricx/qrazybox">QRazyBox</a>
+  <a href="#qrazyboxhttpsgithubcommerricxqrazybox" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Webベースで破損したQRコードの分析と回復に使用される。</p>
+<h2 id="imagemagickhttpsgithubcomimagemagickimagemagick">
+  <a href="https://github.com/ImageMagick/ImageMagick">ImageMagick</a>
+  <a href="#imagemagickhttpsgithubcomimagemagickimagemagick" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>デジタル画像の作成、編集、構成、変換ツール。<br>
+PNG/JPEG/GIF/WebP/HEIC/SVG/PDF/DPX/EXR/TIFFなど、２００以上のさまざまな形式の画像をサポートしている。<br>
+画像のサイズ変更/反転/ミラーリング/回転/ゆがみ/せん断/変換/画像の色の調整などの描画を行うことができる。</p>
+<h2 id="lostmypasshttpswwwlostmypasscomja">
+  <a href="https://www.lostmypass.com/ja/">LostMyPass</a>
+  <a href="#lostmypasshttpswwwlostmypasscomja" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>クラウドパスワード復元サービス。PDF/MS Office文書/RAR/Zip/7zアーカイブなどのパスワードを解読する。<br>
+全て無償ではない。</p>
+<h2 id="firmflawshttpsgithubcomganapatifirmflaws">
+  <a href="https://github.com/Ganapati/firmflaws">firmflaws</a>
+  <a href="#firmflawshttpsgithubcomganapatifirmflaws" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>ファームウェアをアップロードし、静的分析を実行します。</p>
+<h2 id="その他-1">
+  その他
+  <a href="#%e3%81%9d%e3%81%ae%e4%bb%96-1" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p><strong>fls</strong> ディスクイメージ内のファイルとディレクトリの名前を列挙する。また、inodeで指定されたiノードを使用しているディレクトリの最近削除されたファイル名を表示できる。
+<strong>icat</strong> 指定したiノード番号に基づくファイルのコンテンツを出力する。<br>
+<strong>dd</strong> ブロック単位でファイルをコピー、変換する。</p>
+<!-- raw HTML omitted -->
+<h1 id="osint">
+  OSINT
+  <a href="#osint" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<h2 id="osint-frameworkhttpsosintframeworkcom">
+  <a href="https://osintframework.com/">OSINT Framework</a>
+  <a href="#osint-frameworkhttpsosintframeworkcom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>カテゴリー分けされた、様々なOSINT技術が集められたサイト。</p>
+<h2 id="checkusernameshttpscheckusernamescom">
+  <a href="https://checkusernames.com/">CheckUserNames</a>
+  <a href="#checkusernameshttpscheckusernamescom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>500を超えるソーシャルネットワークでユーザー名が使用可能かどうかを確認できる。</p>
+<h2 id="beenverifiedhttpswwwbeenverifiedcom">
+  <a href="https://www.beenverified.com/">BeenVerified</a>
+  <a href="#beenverifiedhttpswwwbeenverifiedcom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>人物名/電話番号/メール/住所/車両から情報を検索できる。</p>
+<h2 id="shodanhttpswwwshodanio">
+  <a href="https://www.shodan.io/">Shodan</a>
+  <a href="#shodanhttpswwwshodanio" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>インターネットに接続されている特定の種類のコンピューターを検索できるようにする検索エンジン。</p>
+<h2 id="builtwithhttpsbuiltwithcom">
+  <a href="https://builtwith.com/">BuiltWith</a>
+  <a href="#builtwithhttpsbuiltwithcom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Webサイトがどのようなもので構築されているかを調べられます。</p>
+<h2 id="maltegohttpswwwmaltegocomdownloads">
+  <a href="https://www.maltego.com/downloads/">Maltego</a>
+  <a href="#maltegohttpswwwmaltegocomdownloads" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>調査対象のドメインやDNS名などからインターネット上の情報を収集し、その関係性を可視化するオープンソースインテリジェンスツール。</p>
+<h2 id="theharvesterhttpsgithubcomlaramiestheharvester">
+  <a href="https://github.com/laramies/theHarvester">theHarvester</a>
+  <a href="#theharvesterhttpsgithubcomlaramiestheharvester" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>レッドチーム評価または侵入テストの偵察段階で使用するように設計された、使いやすく強力なツール。<br>
+ドメインの外部からの脅威の状況を判断するのに役立ちます。<br>
+人の名前、電子メール、IP、サブドメイン、URLなどを公開ソースから収集します。</p>
+<h2 id="spiderfoothttpswwwspiderfootnet">
+  <a href="https://www.spiderfoot.net/">SpiderFoot</a>
+  <a href="#spiderfoothttpswwwspiderfootnet" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>100以上の公開データソースに自動的に問い合わせ、IPアドレス、ドメイン名、メールアドレス、名前などの情報を収集する偵察ツール。</p>
+<h2 id="creepyhttpswwwgeocreepycom">
+  <a href="https://www.geocreepy.com/">Creepy</a>
+  <a href="#creepyhttpswwwgeocreepycom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>位置情報OSINTツール。オンラインソースから位置情報関連の情報を収集し、地図上に表示したり、正確な場所や日付に基づいてフィルタリング検索をしたり、Googleマップで分析するためにcsv形式またはkmlでエクスポートができる。</p>
+<h2 id="metagoofilhttpsgithubcomlaramiesmetagoofil">
+  <a href="https://github.com/laramies/metagoofil">Metagoofil</a>
+  <a href="#metagoofilhttpsgithubcomlaramiesmetagoofil" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>対象のWebサイトで公開されている公開ドキュメント(pdf、doc、xls、pptなど)のメタデータを抽出するためのツール。ユーザー名、人の名前、共有リソース名、サーバー名などを取得できる。</p>
+<h2 id="raccoonhttpsgithubcomevyatarmegedraccoon">
+  <a href="https://github.com/evyatarmeged/Raccoon">Raccoon</a>
+  <a href="#raccoonhttpsgithubcomevyatarmegedraccoon" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>whois情報、TLSデータのDNSレコードの取得、サブドメインの列挙、スレッド化されたディレクトリバスティングなど偵察と情報収集に使用されます。</p>
+<!-- raw HTML omitted -->
+<h1 id="web">
+  Web
+  <a href="#web" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<h2 id="ffufhttpsgithubcomffufffuf">
+  <a href="https://github.com/ffuf/ffuf">ffuf</a>
+  <a href="#ffufhttpsgithubcomffufffuf" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Webファジングツール。<br>
+ディレクトリ/GETパラメータ/HOSTヘッダー/POSTデータのファジングが可能。</p>
+<h2 id="commixhttpsgithubcomcommixprojectcommix">
+  <a href="https://github.com/commixproject/commix">Commix</a>
+  <a href="#commixhttpsgithubcomcommixprojectcommix" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>コマンドインジェクションの脆弱性の検出と悪用を自動化するオープンソースの侵入テストツール。</p>
+<h2 id="wpscanhttpsgithubcomwpscanteamwpscan">
+  <a href="https://github.com/wpscanteam/wpscan">WPScan</a>
+  <a href="#wpscanhttpsgithubcomwpscanteamwpscan" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>WordPress Security Scanner。<br>
+Rubyで書かれたWordPressの脆弱性スキャンツール。</p>
+<h2 id="webhooksitehttpswebhooksite">
+  <a href="https://webhook.site">Webhook.site</a>
+  <a href="#webhooksitehttpswebhooksite" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>webhookは、web開発でカスタムのコールバックを用いてウェブページやウェブアプリケーションの動作を追加または変更するための方法です。</p>
+<h2 id="posmanhttpswwwpostmancom">
+  <a href="https://www.postman.com/">Posman</a>
+  <a href="#posmanhttpswwwpostmancom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>WebAPI開発用ツール。Requestの内容やTokenを設定し、APIに送ることでResponseが返ってきます。</p>
+<h2 id="sqlmaphttpsgithubcomsqlmapprojectsqlmap">
+  <a href="https://github.com/sqlmapproject/sqlmap">SQLMap</a>
+  <a href="#sqlmaphttpsgithubcomsqlmapprojectsqlmap" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>SQLインジェクションの欠陥を検出して悪用し、データベースサーバーを乗っ取るプロセスを自動化します。</p>
+<h2 id="tplmaphttpsgithubcomepinnatplmap">
+  <a href="https://github.com/epinna/tplmap">Tplmap</a>
+  <a href="#tplmaphttpsgithubcomepinnatplmap" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>コードインジェクションおよびサーバーサイドテンプレートインジェクションの脆弱性の悪用を支援し、基盤となるオペレーティングシステムにアクセスするためのさまざまなサンドボックスエスケープ手法を使用します。</p>
+<h2 id="xsserhttpsgithubcomepsylonxsser">
+  <a href="https://github.com/epsylon/xsser">XSSer</a>
+  <a href="#xsserhttpsgithubcomepsylonxsser" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>WebベースのアプリケーションのXSS脆弱性を検出、悪用、報告するための自動フレームワーク。</p>
+<h2 id="seclistshttpsgithubcomdanielmiesslerseclists">
+  <a href="https://github.com/danielmiessler/SecLists">SecLists</a>
+  <a href="#seclistshttpsgithubcomdanielmiesslerseclists" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>セキュリテイアセスメントに役立つ複数種類のデータをリストとしてまとめたもの。<br>
+ハッキングの危険性が高いユーザー名/パスワード/URL/機密データなどが含まれたリストです。</p>
+<h2 id="git-dumperhttpsgithubcomarthaudgit-dumper">
+  <a href="https://github.com/arthaud/git-dumper">git-dumper</a>
+  <a href="#git-dumperhttpsgithubcomarthaudgit-dumper" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Webサイトからgitリポジトリをダンプするツール。</p>
+<h2 id="web-ctf-cheatsheethttpsgithubcomw181496web-ctf-cheatsheet">
+  <a href="https://github.com/w181496/Web-CTF-Cheatsheet">Web-CTF-Cheatsheet</a>
+  <a href="#web-ctf-cheatsheethttpsgithubcomw181496web-ctf-cheatsheet" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Webに関するエクスプロイトコードが集められている。</p>
+<h2 id="js-beautifierhttpsbeautifierio">
+  <a href="https://beautifier.io/">js-beautifier</a>
+  <a href="#js-beautifierhttpsbeautifierio" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>難読化処理されたスクリプトの部分的な難読化解除を行います。</p>
+<!-- raw HTML omitted -->
+<h1 id="misc">
+  Misc
+  <a href="#misc" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<h2 id="impackethttpsgithubcomsecureauthcorpimpacket">
+  <a href="https://github.com/SecureAuthCorp/impacket">Impacket</a>
+  <a href="#impackethttpsgithubcomsecureauthcorpimpacket" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>ネットワークプロトコルを操作するためのPythonクラスのコレクションです。<br>
+Impacketは、パケットへの低レベルのプログラムによるアクセスと、一部のプロトコル(SMB1-3やMSRPCなど)のプロトコル実装自体を提供することに重点を置いています。
+NMB/SMB1/SMB2/SMB3/NTLM/Kerberos/MSRPC/TDS/LDAPなどのプロトコルを実装している。</p>
+<h2 id="ctf-checklisthttpsfareedfauzigitbookioctf-checklist-for-beginner">
+  <a href="https://fareedfauzi.gitbook.io/ctf-checklist-for-beginner/">CTF Checklist</a>
+  <a href="#ctf-checklisthttpsfareedfauzigitbookioctf-checklist-for-beginner" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>CTF競技でのいくつかのヒント、知識、およびツールについての説明。</p>
+<h2 id="regexperhttpsregexpercom">
+  <a href="https://regexper.com/">REGEXPER</a>
+  <a href="#regexperhttpsregexpercom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>正規表現の可視化。</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="https://er072391.github.io/posts/dreamhackctf-web-writeups/">
+                  <span class="button__text">DreamhackCTF-Web-Writeups</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >er072391 Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span
+          >© 2022 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://er072391.github.io/assets/main.js"></script>
+<script src="https://er072391.github.io/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

