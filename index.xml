@@ -5,21 +5,21 @@
     
     
     
-    <link>https://er072391.github.io/</link>
+    <link>https://er072391.github.io/index.html/</link>
     <description>Recent content on er072391 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 21 Oct 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://er072391.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://er072391.github.io/index.html/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CTF Support</title>
-      <link>https://er072391.github.io/posts/ctf-support/</link>
+      <link>https://er072391.github.io/index.html/posts/ctf-support/</link>
       <pubDate>Fri, 21 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://er072391.github.io/posts/ctf-support/</guid>
+      <guid>https://er072391.github.io/index.html/posts/ctf-support/</guid>
       <description>
         
           
@@ -55,10 +55,10 @@ Binary Exploitation Notes # バイナリエクスプロイトに関しての記�
     
     <item>
       <title>DreamhackCTF-Web-Writeups</title>
-      <link>https://er072391.github.io/posts/dreamhackctf-web-writeups/</link>
+      <link>https://er072391.github.io/index.html/posts/dreamhackctf-web-writeups/</link>
       <pubDate>Thu, 13 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://er072391.github.io/posts/dreamhackctf-web-writeups/</guid>
+      <guid>https://er072391.github.io/index.html/posts/dreamhackctf-web-writeups/</guid>
       <description>
         
           
@@ -76,10 +76,10 @@ Binary Exploitation Notes # バイナリエクスプロイトに関しての記�
     
     <item>
       <title>ELFの保護機能について</title>
-      <link>https://er072391.github.io/posts/elf%E3%81%AE%E4%BF%9D%E8%AD%B7%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link>
+      <link>https://er072391.github.io/index.html/posts/elf%E3%81%AE%E4%BF%9D%E8%AD%B7%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</link>
       <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://er072391.github.io/posts/elf%E3%81%AE%E4%BF%9D%E8%AD%B7%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid>
+      <guid>https://er072391.github.io/index.html/posts/elf%E3%81%AE%E4%BF%9D%E8%AD%B7%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</guid>
       <description>
         
           
@@ -112,10 +112,10 @@ Automatic Fortification # Automatic Fortificationはコンパイル時に、バ�
     
     <item>
       <title>ImaginaryCTF-Web-Writeups</title>
-      <link>https://er072391.github.io/posts/imaginaryctf-web-writeups/</link>
+      <link>https://er072391.github.io/index.html/posts/imaginaryctf-web-writeups/</link>
       <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://er072391.github.io/posts/imaginaryctf-web-writeups/</guid>
+      <guid>https://er072391.github.io/index.html/posts/imaginaryctf-web-writeups/</guid>
       <description>
         
           
