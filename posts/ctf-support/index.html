@@ -37,31 +37,31 @@ Binary Exploitation Notes # バイナリエクスプロイトに関しての記�
   content=""
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://er072391.github.io/index.html/posts/ctf-support/" />
+<link rel="canonical" href="https://er072391.github.io/posts/ctf-support/" />
 
 
 
 
 
-<link rel="stylesheet" href="https://er072391.github.io/index.html/assets/style.css" />
+<link rel="stylesheet" href="https://er072391.github.io/assets/style.css" />
 
-<link rel="stylesheet" href="https://er072391.github.io/index.html/style.css" />
+<link rel="stylesheet" href="https://er072391.github.io/style.css" />
 
 
 <link
   rel="apple-touch-icon-precomposed"
   sizes="144x144"
-  href="https://er072391.github.io/index.html/img/apple-touch-icon-144-precomposed.png"
+  href="https://er072391.github.io/img/apple-touch-icon-144-precomposed.png"
 />
-<link rel="shortcut icon" href="https://er072391.github.io/index.html/img/favicon.png" />
+<link rel="shortcut icon" href="https://er072391.github.io/img/favicon.png" />
 
 
-<link href="https://er072391.github.io/index.html/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="https://er072391.github.io/index.html/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="https://er072391.github.io/index.html/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="https://er072391.github.io/index.html/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="https://er072391.github.io/index.html/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="https://er072391.github.io/index.html/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://er072391.github.io/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -111,7 +111,7 @@ checksec # 実行可能ファイルのPIE/RELRO/Canaries/ASLRなどのセキュ�
 rp(&#43;&#43;) # PE/ELF/Mach-Oの実行ファイルおよびx86/x64/ARM/ARM64のアーキテクチャ用のROPガジェットファインダー。
 Binary Exploitation Notes # バイナリエクスプロイトに関しての記述。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://er072391.github.io/index.html/posts/ctf-support/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://er072391.github.io/posts/ctf-support/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-10-21T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-10-21T00:00:00+00:00" />
 
@@ -531,6 +531,21 @@ PNG/JPEG/GIF/WebP/HEIC/SVG/PDF/DPX/EXR/TIFFなど、２００以上のさまざ�
   <a href="#raccoonhttpsgithubcomevyatarmegedraccoon" class="h-anchor" aria-hidden="true">#</a>
 </h2>
 <p>whois情報、TLSデータのDNSレコードの取得、サブドメインの列挙、スレッド化されたディレクトリバスティングなど偵察と情報収集に使用されます。</p>
+<h2 id="discoverhttpsgithubcomleebairddiscover">
+  <a href="https://github.com/leebaird/discover">Discover</a>
+  <a href="#discoverhttpsgithubcomleebairddiscover" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>DiscoverスクリプトはKali Linuxの偵察ツールをすべて組み合わせたものであり、定期的にメンテナスされています。Discoverスクリプトの受動的なドメインスキャンには、ARIN、DNSRecon、gooflie、goog-mail、Goohost、theHarvester、Metasploit、URLCrazy、whois、複数のWebサイト、それしてRecon-ngが使用されます。</p>
+<h2 id="trufflehoghttpsgithubcomtrufflesecuritytrufflehog">
+  <a href="https://github.com/trufflesecurity/trufflehog">truffleHog</a>
+  <a href="#trufflehoghttpsgithubcomtrufflesecuritytrufflehog" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>truffleHogは、さまざまなコミット履歴とブランチでエントロピーの高い文字列をスキャンし、それらを出力するツールです。このため、機密情報、パスワード、キーなどの検出にうってつけです。</p>
+<h2 id="simplyemailhttpsgithubcomsimplysecuritysimplyemail">
+  <a href="https://github.com/SimplySecurity/SimplyEmail">SimplyEmail</a>
+  <a href="#simplyemailhttpsgithubcomsimplysecuritysimplyemail" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>SimplyEmailは、domein日時/Email_List.htmlという形式でファイルを出力します。このツールの出力には、企業のメールアドレスのフォーマットと、有効なユーザーのリストが含まれています。SimplyEmailはBing、Yahoo!、Google、Ask Search、PGP Repos、ファイルなどをチェックするため、時間がかかることがあります。</p>
 <!-- raw HTML omitted -->
 <h1 id="web">
   Web
@@ -599,6 +614,11 @@ Rubyで書かれたWordPressの脆弱性スキャンツール。</p>
   <a href="#js-beautifierhttpsbeautifierio" class="h-anchor" aria-hidden="true">#</a>
 </h2>
 <p>難読化処理されたスクリプトの部分的な難読化解除を行います。</p>
+<h2 id="jsfuckhttpwwwjsfuckcom">
+  <a href="http://www.jsfuck.com/">JSFuck</a>
+  <a href="#jsfuckhttpwwwjsfuckcom" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>JavaScriptを、角かっこ([])、丸かっこ(())、プラス記号(+)、感嘆符(!)を使ってエンコードします。JavaScriptの難解な表記を利用できます。</p>
 <!-- raw HTML omitted -->
 <h1 id="misc">
   Misc
@@ -621,6 +641,26 @@ NMB/SMB1/SMB2/SMB3/NTLM/Kerberos/MSRPC/TDS/LDAPなどのプロトコルを実装
   <a href="#regexperhttpsregexpercom" class="h-anchor" aria-hidden="true">#</a>
 </h2>
 <p>正規表現の可視化。</p>
+<h2 id="poc-in-githubhttpsgithubcomnomi-secpoc-in-github">
+  <a href="https://github.com/nomi-sec/PoC-in-GitHub">PoC-in-GitHub</a>
+  <a href="#poc-in-githubhttpsgithubcomnomi-secpoc-in-github" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>GitHubに公開されたCVEのエクスプロイトコードがJSON形式で集められている。</p>
+<h2 id="ptfthe-pentesters-frameworkhttpsgithubcomtrustedsecptf">
+  <a href="https://github.com/trustedsec/ptf">PTF(The PenTesters Framework)</a>
+  <a href="#ptfthe-pentesters-frameworkhttpsgithubcomtrustedsecptf" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>PTFはスクリプトのコレクションであり、ペネトレーションテストに必要なツール群を自動的にインストールしてくれます。たとえば、エクスプロイトツール、情報収集ツール、ポストエクスプロイトツール、PowerShell、脆弱性分析ツールをすべてインストールできます。</p>
+<h2 id="responderhttpsgithubcomspiderlabsresponder">
+  <a href="https://github.com/SpiderLabs/Responder">Responder</a>
+  <a href="#responderhttpsgithubcomspiderlabsresponder" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>Responderは、NTLMv1/NTLMv2/LMv2、拡張セキュリティNTLMSSP、および基本のHTTP認証をサポートする組み込みのHTTP/SMB/MSSQL/FTP/LDAP 不正認証サーバーを備えたLLMNR、NBT-NSおよびMDNSポイズナーです。</p>
+<h2 id="dnscat2httpsgithubcomiagox86dnscat2">
+  <a href="https://github.com/iagox86/dnscat2">dnscat2</a>
+  <a href="#dnscat2httpsgithubcomiagox86dnscat2" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>DNSプロトコル上で暗号化されたC&amp;C(別名C2:コマンドアンドコントロール)チャネルを作成するように設計されています。</p>
 
     </div>
     
@@ -636,7 +676,7 @@ NMB/SMB1/SMB2/SMB3/NTLM/Kerberos/MSRPC/TDS/LDAPなどのプロトコルを実装
             
             
               <span class="button next">
-                <a href="https://er072391.github.io/index.html/posts/dreamhackctf-web-writeups/">
+                <a href="https://er072391.github.io/posts/dreamhackctf-web-writeups/">
                   <span class="button__text">DreamhackCTF-Web-Writeups</span>
                   <span class="button__icon">→</span>
                 </a>
@@ -692,8 +732,8 @@ NMB/SMB1/SMB2/SMB3/NTLM/Kerberos/MSRPC/TDS/LDAPなどのプロトコルを実装
   </div>
 </footer>
 
-<script src="https://er072391.github.io/index.html/assets/main.js"></script>
-<script src="https://er072391.github.io/index.html/assets/prism.js"></script>
+<script src="https://er072391.github.io/assets/main.js"></script>
+<script src="https://er072391.github.io/assets/prism.js"></script>
 
 
       
